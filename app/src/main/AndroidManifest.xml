@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DetailMovieActivity"></activity>
+        <activity android:name=".view.FavoriteActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.DetailMovieActivity" />
         <activity android:name=".view.LocalizationActivity" />
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyMovie3</string>
+    <string name="app_name">Movie XIX</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="setting">setting</string>
@@ -16,4 +16,7 @@
     <string name="release_date">Release Date :</string>
     <string name="overview">Overview</string>
     <string name="change_language">Change Language</string>
+    <string name="favorite">Favorite</string>
+    <string name="success_add">Successfully added to favorites</string>
+    <string name="success_remove">Successfully removed from favorites</string>
 </resources>

@@ -22,15 +22,20 @@ import id.co.endang.mymovie3.model.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
-    private ArrayList<Movie> movies;
+    private ArrayList<Movie> listMovie = new ArrayList<>();
 
-    public MovieAdapter(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public MovieAdapter() {
     }
 
-    public void refresh(ArrayList<Movie> movies) {
-        this.movies = new ArrayList<>();
-        this.movies.addAll(movies);
+    public ArrayList<Movie> getListMovie() {
+        return listMovie;
+    }
+
+    public void setListMovie(ArrayList<Movie> listMovie) {
+        if (this.listMovie.size()>0)
+            this.listMovie.clear();
+
+        this.listMovie.addAll(listMovie);
         notifyDataSetChanged();
     }
 
@@ -43,12 +48,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-        holder.bind(movies.get(position));
+        holder.bind(position);
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return listMovie.size();
     }
 
     public class MovieHolder extends RecyclerView.ViewHolder {
@@ -65,7 +70,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             tvRating = itemView.findViewById(R.id.tv_rating);
         }
 
-        public void bind(final Movie movie) {
+        public void bind(final int position) {
+            final Movie movie = listMovie.get(position);
             if (StringUtils.isNotBlank(movie.getPosterPath())) {
                 String image_url = BuildConfig.IMAGE_URL_BASE_PATH + movie.getPosterPath();
                 Glide.with(this.itemView.getContext())

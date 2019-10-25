@@ -27,7 +27,6 @@ import id.co.endang.mymovie3.rest.RESTMovieCallback;
 
 public class MovieFragment extends BaseFragment implements RESTMovieCallback {
 
-    private ArrayList<Movie> movies = new ArrayList<>();
     private MovieAdapter movieAdapter;
     private ShimmerFrameLayout shimerContainer;
 
@@ -44,7 +43,7 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LANGUAGE", Context.MODE_PRIVATE);
-        movieAdapter = new MovieAdapter(movies);
+        movieAdapter = new MovieAdapter();
 
         RecyclerView rvMovies = view.findViewById(R.id.rvMovies);
         rvMovies.setHasFixedSize(true);
@@ -59,22 +58,22 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
 
             getRESTMovies().getMovies(RESTMovie.MOVIE_TOP_RATED_API, getLanguage(sharedPreferences), this);
         } else {
-            movies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
-            movieAdapter.refresh(movies);
+            ArrayList<Movie> list = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
+            movieAdapter.setListMovie(list);
         }
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
             public void onItemClicked(Movie data) {
-                showDetailMovie(data,getContext());
+                showDetailMovie(data,getContext(),0,false);
             }
         });
     }
 
     @Override
     public void onSuccess(MovieResponse response) {
-        movies = response.getResults();
-        movieAdapter.refresh(movies);
+        ArrayList<Movie> movies = response.getResults();
+        movieAdapter.setListMovie(movies);
         shimerContainer.stopShimmerAnimation();
         shimerContainer.setVisibility(View.GONE);
     }
@@ -86,7 +85,7 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelableArrayList(STATE_MOVIES, movies);
+        outState.putParcelableArrayList(STATE_MOVIES, movieAdapter.getListMovie());
         super.onSaveInstanceState(outState);
     }
 }

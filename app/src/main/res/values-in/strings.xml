@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyMovie3</string>
+    <string name="app_name">Movie XIX</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="setting">setting</string>
@@ -17,4 +17,7 @@
     <string name="release_date">Tanggal Rilis :</string>
     <string name="overview">Deskripsi</string>
     <string name="change_language">Ganti Bahasa</string>
+    <string name="favorite">Favorit</string>
+    <string name="success_add">Berhasil ditambahkan ke favorit</string>
+    <string name="success_remove">Berhasil dihapus dari favorit</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import java.util.Locale;
 
 import id.co.endang.mymovie3.common.BaseAppCompatActivity;
+import id.co.endang.mymovie3.view.FavoriteActivity;
 import id.co.endang.mymovie3.view.LocalizationActivity;
 import id.co.endang.mymovie3.view.MainFragment;
 
@@ -55,7 +56,14 @@ public class MainActivity extends BaseAppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_setting)
             showSetting();
+        else if (item.getItemId()==R.id.action_fav_activity)
+            showFavorite();
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showFavorite() {
+        Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
+        startActivity(intent);
     }
 
     private void showSetting() {
