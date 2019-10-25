@@ -39,6 +39,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         notifyDataSetChanged();
     }
 
+    public void removeItem(int position){
+        this.listMovie.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,listMovie.size());
+    }
+
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -85,14 +91,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickCallBack.onItemClicked(movie);
+                    onItemClickCallBack.onItemClicked(movie,position);
                 }
             });
 
         }
     }
     public interface OnItemClickCallBack {
-        void onItemClicked(Movie data);
+        void onItemClicked(Movie data,int position);
     }
 
     private OnItemClickCallBack onItemClickCallBack;

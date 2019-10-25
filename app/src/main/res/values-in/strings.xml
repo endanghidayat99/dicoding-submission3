@@ -20,4 +20,8 @@
     <string name="favorite">Favorit</string>
     <string name="success_add">Berhasil ditambahkan ke favorit</string>
     <string name="success_remove">Berhasil dihapus dari favorit</string>
+    <string name="no_content">Data Kosong</string>
+    <string name="backdrop_image">gambar backdrop</string>
+    <string name="poster_image">gambar poster</string>
+    <string name="overview_not_found">Desktripsi Belum Ada</string>
 </resources>

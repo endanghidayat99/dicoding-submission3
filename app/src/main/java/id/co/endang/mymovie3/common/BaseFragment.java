@@ -34,6 +34,15 @@ public class BaseFragment extends Fragment {
         startActivity(intent);
     }
 
+    protected void showDetailMovieForResult(Movie data, Context context,int type,boolean isFavorite,int position) {
+        Intent intent = new Intent(context, DetailMovieActivity.class);
+        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE,data);
+        intent.putExtra(DetailMovieActivity.EXTRA_STATUS,isFavorite);
+        intent.putExtra(DetailMovieActivity.EXTRA_TYPE,type);
+        intent.putExtra(DetailMovieActivity.EXTRA_POSITION,position);
+        startActivityForResult(intent,DetailMovieActivity.REQUEST_UPDATE);
+    }
+
     protected ArrayList<Movie> getListMovies(List<MovieFavorite> movieFavorites){
         ArrayList<Movie> movies = new ArrayList<>();
         for (MovieFavorite fav : movieFavorites) {

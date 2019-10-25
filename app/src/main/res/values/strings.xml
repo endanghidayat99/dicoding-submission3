@@ -19,4 +19,8 @@
     <string name="favorite">Favorite</string>
     <string name="success_add">Successfully added to favorites</string>
     <string name="success_remove">Successfully removed from favorites</string>
+    <string name="no_content">No Content</string>
+    <string name="backdrop_image">backdrop image</string>
+    <string name="poster_image">poster image</string>
+    <string name="overview_not_found">Overview Not Found</string>
 </resources>

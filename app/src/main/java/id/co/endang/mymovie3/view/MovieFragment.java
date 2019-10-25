@@ -64,7 +64,7 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
-            public void onItemClicked(Movie data) {
+            public void onItemClicked(Movie data,int position) {
                 showDetailMovie(data,getContext(),0,false);
             }
         });

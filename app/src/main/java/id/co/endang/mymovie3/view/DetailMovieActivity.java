@@ -1,5 +1,6 @@
 package id.co.endang.mymovie3.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,9 @@ public class DetailMovieActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_STATUS = "extra_status";
     public static final String EXTRA_TYPE = "extra_type";
+    public static final String EXTRA_POSITION = "extra_position";
+    public static final int REQUEST_UPDATE = 200;
+    public static final int RESPONSE_REMOVE = 301;
     private ProgressBar progressBar;
     private Movie movie;
     private TextView overview, title, releaseDate, rating;
@@ -36,6 +40,7 @@ public class DetailMovieActivity extends AppCompatActivity {
     private boolean isFavorite;
     private MovieRepository movieRepository;
     private int type;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         poster.setContentDescription(title.getText().toString());
         rating.setText(movie.getVoteAverage().toString());
         releaseDate.setText(StringUtils.isNotBlank(movie.getReleaseDate()) ? movie.getReleaseDate() : movie.getFirstAirDate());
-        overview.setText(movie.getOverview());
+        overview.setText(StringUtils.isNotBlank(movie.getOverview())?movie.getOverview():getString(R.string.overview_not_found));
         showLoading(false);
     }
 
@@ -98,6 +103,7 @@ public class DetailMovieActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.action_favorite){
             if (isFavorite) {
+                position = getIntent().getIntExtra(EXTRA_POSITION,0);
                 deleteFromFavorite();
             }else{
                 addToFavorite();
@@ -110,7 +116,10 @@ public class DetailMovieActivity extends AppCompatActivity {
     private void deleteFromFavorite() {
         MovieFavorite fav = getMovieFavorite();
         movieRepository.deleteFavorite(fav.getId_tmb());
-        Snackbar.make(constraintLayout, getString(R.string.success_remove), Snackbar.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_POSITION,position);
+        setResult(RESPONSE_REMOVE,intent);
+        finish();
     }
 
     private void addToFavorite() {

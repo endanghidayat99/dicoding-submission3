@@ -1,9 +1,11 @@
 package id.co.endang.mymovie3.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +30,8 @@ public class MovieFavFragment extends BaseFragment {
     private MovieAdapter movieAdapter;
     private ShimmerFrameLayout shimerContainer;
     private MovieRepository movieRepository;
+    private LinearLayout noContent;
+    private RecyclerView rvMovies;
 
     @Nullable
     @Override
@@ -41,16 +45,17 @@ public class MovieFavFragment extends BaseFragment {
         movieRepository = new MovieRepository(getContext());
         movieAdapter = new MovieAdapter();
 
-        RecyclerView rvMovies = view.findViewById(R.id.rvMovies);
+        rvMovies = view.findViewById(R.id.rvMovies);
         rvMovies.setHasFixedSize(true);
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovies.setAdapter(movieAdapter);
+        noContent = view.findViewById(R.id.noContent);
+        noContent.setVisibility(View.VISIBLE);
         if (savedInstanceState == null) {
             shimerContainer = view.findViewById(R.id.shimmer_container);
-            shimerContainer.setVisibility(View.VISIBLE);
-            shimerContainer.setDuration(1000);
-            shimerContainer.startShimmerAnimation();
-
+//            shimerContainer.setVisibility(View.VISIBLE);
+//            shimerContainer.setDuration(1000);
+//            shimerContainer.startShimmerAnimation();
             loadDataMovie();
         } else {
             ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
@@ -59,21 +64,10 @@ public class MovieFavFragment extends BaseFragment {
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
-            public void onItemClicked(Movie data) {
-                showDetailMovie(data,getContext(),0,true);
+            public void onItemClicked(Movie data,int position) {
+                showDetailMovieForResult(data,getContext(),0,true,position);
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        movieAdapter.setListMovie(new ArrayList<Movie>());
-        shimerContainer = getView().findViewById(R.id.shimmer_container);
-        shimerContainer.setVisibility(View.VISIBLE);
-        shimerContainer.setDuration(1000);
-        shimerContainer.startShimmerAnimation();
-        loadDataMovie();
     }
 
     private void loadDataMovie() {
@@ -83,11 +77,28 @@ public class MovieFavFragment extends BaseFragment {
                 if (movieFavorites.size()>0){
                     ArrayList<Movie> movies = getListMovies(movieFavorites);
                     movieAdapter.setListMovie(movies);
-                    shimerContainer.stopShimmerAnimation();
-                    shimerContainer.setVisibility(View.GONE);
+                    noContent.setVisibility(View.GONE);
+//                    shimerContainer.stopShimmerAnimation();
+//                    shimerContainer.setVisibility(View.GONE);
+
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+            if (requestCode == DetailMovieActivity.REQUEST_UPDATE){
+                if (resultCode == DetailMovieActivity.RESPONSE_REMOVE){
+                    int position = data.getIntExtra(DetailMovieActivity.EXTRA_POSITION,0);
+                    movieAdapter.removeItem(position);
+                    rvMovies.smoothScrollToPosition(position);
+                    if (movieAdapter.getListMovie().size()==0)noContent.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
 }

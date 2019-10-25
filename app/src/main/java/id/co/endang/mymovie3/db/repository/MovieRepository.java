@@ -49,8 +49,7 @@ public class MovieRepository {
 
             @Override
             protected Integer doInBackground(Void... voids) {
-                int status = movieDatabase.daoAccess().deleteFavorite(id);
-                return status;
+                return movieDatabase.daoAccess().deleteFavorite(id);
             }
 
             @Override
