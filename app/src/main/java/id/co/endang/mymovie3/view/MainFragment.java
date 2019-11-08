@@ -18,6 +18,12 @@ import id.co.endang.mymovie3.adapter.MovieTabAdapter;
 
 public class MainFragment extends Fragment {
 
+    private ViewPager viewPager;
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,10 +34,9 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new MovieTabAdapter(getChildFragmentManager(), getContext()));
-
         tabLayout.setupWithViewPager(viewPager);
     }
 }

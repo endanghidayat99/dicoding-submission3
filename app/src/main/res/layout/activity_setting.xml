@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SettingActivity">
+
+    <TextView
+        android:id="@+id/txtLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/language_setting_label"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/rgLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLanguage">
+
+        <RadioButton
+            android:id="@+id/rbEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/en_lang" />
+
+        <RadioButton
+            android:id="@+id/rbIndonesia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/id_lang" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtReleaseLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/release_reminder"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgLanguage" />
+
+    <TextView
+        android:id="@+id/txtReleaseDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/reminder_release_desc"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/batas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReleaseLbl" />
+
+    <Switch
+        android:id="@+id/switch_release"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:width="50dp"
+        android:textOff="@string/no"
+        android:textOn="@string/yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/batas"
+        app:layout_constraintTop_toTopOf="@+id/txtReleaseDesc" />
+
+    <TextView
+        android:id="@+id/txtDailyLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/daily_reminder"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReleaseDesc" />
+
+    <TextView
+        android:id="@+id/txtDailyDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/daily_reminder_desc"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/batas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDailyLbl" />
+
+    <Switch
+        android:id="@+id/switch_daily"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:width="50dp"
+        android:textOff="@string/no"
+        android:textOn="@string/yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/batas"
+        app:layout_constraintTop_toTopOf="@+id/txtDailyDesc" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/batas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="303dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

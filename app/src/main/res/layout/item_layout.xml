@@ -20,8 +20,8 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/img_item_photo"
         android:layout_toRightOf="@+id/img_item_photo"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_item_name"
@@ -36,23 +36,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_star_black_24dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_star_black_24dp" />
 
             <TextView
+                android:id="@+id/tv_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_rating"
+                android:layout_marginBottom="5dp"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                tools:text="@string/rating"
-                android:layout_marginBottom="5dp"
-                />
+                tools:text="@string/rating" />
         </LinearLayout>
-
 
 
         <TextView

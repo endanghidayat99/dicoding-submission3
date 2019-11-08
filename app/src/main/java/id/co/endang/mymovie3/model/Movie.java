@@ -6,30 +6,33 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
     @SerializedName("id")
     private Integer id;
-
     @SerializedName("title")
     private String title;
-
     @SerializedName("name")
     private String name;
-
     @SerializedName("overview")
     private String overview;
-
     @SerializedName("release_date")
     private String releaseDate;
-
     @SerializedName("first_air_date")
     private String firstAirDate;
-
     @SerializedName("poster_path")
     private String posterPath;
-
     @SerializedName("vote_average")
     private Double voteAverage;
-
     @SerializedName("backdrop_path")
     private String backdropPath;
 
@@ -55,18 +58,6 @@ public class Movie implements Parcelable {
 
     public Movie() {
     }
-
-    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
-
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
 
     public Integer getId() {
         return id;

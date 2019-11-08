@@ -1,7 +1,5 @@
 package id.co.endang.mymovie3.view;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +40,6 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LANGUAGE", Context.MODE_PRIVATE);
         movieAdapter = new MovieAdapter();
 
         RecyclerView rvMovies = view.findViewById(R.id.rvMovies);
@@ -56,7 +53,7 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
             shimerContainer.setDuration(1000);
             shimerContainer.startShimmerAnimation();
 
-            getRESTMovies().getMovies(RESTMovie.MOVIE_TOP_RATED_API, getLanguage(sharedPreferences), this);
+            getRESTMovies().getMovies(RESTMovie.MOVIE_TOP_RATED_API, getLanguage(), this);
         } else {
             ArrayList<Movie> list = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
             movieAdapter.setListMovie(list);
@@ -64,8 +61,8 @@ public class MovieFragment extends BaseFragment implements RESTMovieCallback {
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
-            public void onItemClicked(Movie data,int position) {
-                showDetailMovie(data,getContext(),0,false);
+            public void onItemClicked(Movie data, int position) {
+                showDetailMovie(data, getContext(), 0, false);
             }
         });
     }

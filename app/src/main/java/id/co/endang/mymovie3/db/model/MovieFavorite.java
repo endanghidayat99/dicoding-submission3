@@ -1,5 +1,7 @@
 package id.co.endang.mymovie3.db.model;
 
+import android.database.Cursor;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
 @Entity(tableName = "movie_favorite")
 public class MovieFavorite implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     private int id_tmb;
     private String title;
@@ -19,11 +21,26 @@ public class MovieFavorite implements Serializable {
     private Double voteAverage;
     private int movieType;//0 - Movie, 1 - TV
 
-    public int getId() {
+    public MovieFavorite() {
+    }
+
+    public MovieFavorite(Cursor cursor) {
+        this.id = cursor.getLong(cursor.getColumnIndex("id"));
+        this.id_tmb = cursor.getInt(cursor.getColumnIndex("id_tmb"));
+        this.title = cursor.getString(cursor.getColumnIndex("title"));
+        this.overview = cursor.getString(cursor.getColumnIndex("overview"));
+        this.releaseDate = cursor.getString(cursor.getColumnIndex("releaseDate"));
+        this.posterPath = cursor.getString(cursor.getColumnIndex("posterPath"));
+        this.backdropPath = cursor.getString(cursor.getColumnIndex("backdropPath"));
+        this.voteAverage = cursor.getDouble(cursor.getColumnIndex("voteAverage"));
+        this.movieType = cursor.getInt(cursor.getColumnIndex("movieType"));
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -42,7 +42,7 @@ public class TVShowFragment extends BaseFragment implements RESTMovieCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LANGUAGE", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SETTING", Context.MODE_PRIVATE);
         movieAdapter = new MovieAdapter();
         RecyclerView rvMovies = view.findViewById(R.id.rvMovies);
         rvMovies.setHasFixedSize(true);
@@ -54,7 +54,7 @@ public class TVShowFragment extends BaseFragment implements RESTMovieCallback {
             shimerContainer.setVisibility(View.VISIBLE);
             shimerContainer.setDuration(1000);
             shimerContainer.startShimmerAnimation();
-            getRESTMovies().getMovies(RESTMovie.TV_TOP_RATED_API, getLanguage(sharedPreferences), this);
+            getRESTMovies().getMovies(RESTMovie.TV_TOP_RATED_API, getLanguage(), this);
         } else {
             ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
             movieAdapter.setListMovie(movies);
@@ -62,8 +62,8 @@ public class TVShowFragment extends BaseFragment implements RESTMovieCallback {
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
-            public void onItemClicked(Movie data,int position) {
-                showDetailMovie(data,getContext(),1,false);
+            public void onItemClicked(Movie data, int position) {
+                showDetailMovie(data, getContext(), 1, false);
             }
         });
 

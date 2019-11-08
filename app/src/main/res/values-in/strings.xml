@@ -3,7 +3,7 @@
     <string name="app_name">Movie XIX</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
-    <string name="setting">setting</string>
+    <string name="setting">Pengaturan</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -24,4 +24,16 @@
     <string name="backdrop_image">gambar backdrop</string>
     <string name="poster_image">gambar poster</string>
     <string name="overview_not_found">Desktripsi Belum Ada</string>
+    <string name="search">Cari</string>
+    <string name="search_hint">Cari Film/Acara TV</string>
+    <string name="language_setting_label">Pengaturan Bahasa</string>
+
+    <string name="release_reminder">Pengingat Rilis</string>
+    <string name="reminder_release_desc">Pengingat Film yang dirilis hari ini</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="daily_reminder_desc">Pengingat untuk kembali ke aplikasi</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="daily_remind_text">merindukanmu!</string>
+    <string name="appwidget_text">Film Favorit</string>
 </resources>

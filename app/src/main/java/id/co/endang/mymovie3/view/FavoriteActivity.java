@@ -21,7 +21,7 @@ public class FavoriteActivity extends BaseAppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.toolbar_fav);
         toolbar.setTitle(R.string.favorite);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar()!=null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
@@ -40,7 +40,7 @@ public class FavoriteActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }

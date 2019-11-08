@@ -1,5 +1,7 @@
 package id.co.endang.mymovie3.db.dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -24,4 +26,10 @@ public interface DaoAccess {
 
     @Query("select * from movie_favorite where id_tmb=:id")
     MovieFavorite getMovieById(int id);
+
+    @Query("SELECT * from movie_favorite")
+    Cursor selectAll();
+
+    @Query("SELECT * from movie_favorite where id=:id")
+    Cursor selectById(long id);
 }

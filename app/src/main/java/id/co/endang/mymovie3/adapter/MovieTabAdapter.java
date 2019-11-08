@@ -18,7 +18,7 @@ public class MovieTabAdapter extends FragmentPagerAdapter {
     private final Context mContext;
 
     public MovieTabAdapter(@NonNull FragmentManager fm, Context mContext) {
-        super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mContext = mContext;
     }
 

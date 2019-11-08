@@ -23,6 +23,7 @@ import id.co.endang.mymovie3.model.Movie;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
     private ArrayList<Movie> listMovie = new ArrayList<>();
+    private OnItemClickCallBack onItemClickCallBack;
 
     public MovieAdapter() {
     }
@@ -32,17 +33,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     }
 
     public void setListMovie(ArrayList<Movie> listMovie) {
-        if (this.listMovie.size()>0)
+        if (this.listMovie.size() > 0)
             this.listMovie.clear();
 
         this.listMovie.addAll(listMovie);
         notifyDataSetChanged();
     }
 
-    public void removeItem(int position){
+    public void removeItem(int position) {
         this.listMovie.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position,listMovie.size());
+        notifyItemRangeChanged(position, listMovie.size());
     }
 
     @NonNull
@@ -60,6 +61,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     @Override
     public int getItemCount() {
         return listMovie.size();
+    }
+
+    public void setOnItemClickCallBack(OnItemClickCallBack onItemClickCallBack) {
+        this.onItemClickCallBack = onItemClickCallBack;
+    }
+
+    public interface OnItemClickCallBack {
+        void onItemClicked(Movie data, int position);
     }
 
     public class MovieHolder extends RecyclerView.ViewHolder {
@@ -91,19 +100,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickCallBack.onItemClicked(movie,position);
+                    onItemClickCallBack.onItemClicked(movie, position);
                 }
             });
 
         }
-    }
-    public interface OnItemClickCallBack {
-        void onItemClicked(Movie data,int position);
-    }
-
-    private OnItemClickCallBack onItemClickCallBack;
-
-    public void setOnItemClickCallBack(OnItemClickCallBack onItemClickCallBack) {
-        this.onItemClickCallBack = onItemClickCallBack;
     }
 }

@@ -17,17 +17,21 @@ public class MovieRepository {
     private String DB_NAME = "db_movie";
     private MovieDatabase movieDatabase;
 
-    public MovieRepository(Context context){
-        movieDatabase = Room.databaseBuilder(context,MovieDatabase.class,DB_NAME).build();
+    public MovieRepository(Context context) {
+        movieDatabase = Room.databaseBuilder(context, MovieDatabase.class, DB_NAME).build();
     }
 
-    public void insertFavorite(final MovieFavorite movie){
-        new AsyncTask<Void,Void,Long>(){
+    public MovieDatabase getMovieDatabase() {
+        return movieDatabase;
+    }
+
+    public void insertFavorite(final MovieFavorite movie) {
+        new AsyncTask<Void, Void, Long>() {
             @Override
             protected Long doInBackground(Void... voids) {
                 MovieFavorite movieFavorite = movieDatabase.daoAccess().getMovieById(movie.getId_tmb());
                 Long status = 0L;
-                if (movieFavorite==null)
+                if (movieFavorite == null)
                     status = movieDatabase.daoAccess().insertFavorite(movie);
                 return status;
             }
@@ -35,17 +39,17 @@ public class MovieRepository {
             @Override
             protected void onPostExecute(Long aLong) {
                 super.onPostExecute(aLong);
-                Log.d("REPO","INSERTED "+aLong+" ROW");
+                Log.d("REPO", "INSERTED " + aLong + " ROW");
             }
         }.execute();
     }
 
-    public LiveData<List<MovieFavorite>> getMovieByType(int type){
+    public LiveData<List<MovieFavorite>> getMovieByType(int type) {
         return movieDatabase.daoAccess().getMovieByType(type);
     }
 
-    public void deleteFavorite(final int id){
-        new AsyncTask<Void,Void,Integer>(){
+    public void deleteFavorite(final int id) {
+        new AsyncTask<Void, Void, Integer>() {
 
             @Override
             protected Integer doInBackground(Void... voids) {
@@ -55,7 +59,7 @@ public class MovieRepository {
             @Override
             protected void onPostExecute(Integer aLong) {
                 super.onPostExecute(aLong);
-                Log.d("REPO","Berhasil hapus "+aLong+" row");
+                Log.d("REPO", "Berhasil hapus " + aLong + " row");
             }
         }.execute();
     }

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movie XIX Favorite</string>
+    <string name="movie_name">movie name</string>
+    <string name="movie_overview">movie overview</string>
+    <string name="movie_rating">rating</string>
+    <string name="no_content">No Content</string>
+</resources>

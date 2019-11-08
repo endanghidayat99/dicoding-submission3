@@ -17,33 +17,36 @@ import id.co.endang.mymovie3.view.DetailMovieActivity;
 
 public class BaseFragment extends Fragment {
     public static final String STATE_MOVIES = "state_movies";
+    protected static final String PREF_LANGUAGE = "language";
+    protected static final String ID_LANGUAGE = "id";
+    protected static final String EN_LANGUAGE = "en";
 
     public RESTMovie getRESTMovies() {
         return new RESTMovie();
     }
 
-    public String getLanguage(SharedPreferences sharedPreferences) {
-        return sharedPreferences.getString("language", "en");
+    public String getLanguage() {
+        return getSharedPreferences().getString(PREF_LANGUAGE, EN_LANGUAGE);
     }
 
-    protected void showDetailMovie(Movie data, Context context,int type,boolean isFavorite) {
+    protected void showDetailMovie(Movie data, Context context, int type, boolean isFavorite) {
         Intent intent = new Intent(context, DetailMovieActivity.class);
-        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE,data);
-        intent.putExtra(DetailMovieActivity.EXTRA_STATUS,isFavorite);
-        intent.putExtra(DetailMovieActivity.EXTRA_TYPE,type);
+        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, data);
+        intent.putExtra(DetailMovieActivity.EXTRA_STATUS, isFavorite);
+        intent.putExtra(DetailMovieActivity.EXTRA_TYPE, type);
         startActivity(intent);
     }
 
-    protected void showDetailMovieForResult(Movie data, Context context,int type,boolean isFavorite,int position) {
+    protected void showDetailMovieForResult(Movie data, Context context, int type, boolean isFavorite, int position) {
         Intent intent = new Intent(context, DetailMovieActivity.class);
-        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE,data);
-        intent.putExtra(DetailMovieActivity.EXTRA_STATUS,isFavorite);
-        intent.putExtra(DetailMovieActivity.EXTRA_TYPE,type);
-        intent.putExtra(DetailMovieActivity.EXTRA_POSITION,position);
-        startActivityForResult(intent,DetailMovieActivity.REQUEST_UPDATE);
+        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, data);
+        intent.putExtra(DetailMovieActivity.EXTRA_STATUS, isFavorite);
+        intent.putExtra(DetailMovieActivity.EXTRA_TYPE, type);
+        intent.putExtra(DetailMovieActivity.EXTRA_POSITION, position);
+        startActivityForResult(intent, DetailMovieActivity.REQUEST_UPDATE);
     }
 
-    protected ArrayList<Movie> getListMovies(List<MovieFavorite> movieFavorites){
+    protected ArrayList<Movie> getListMovies(List<MovieFavorite> movieFavorites) {
         ArrayList<Movie> movies = new ArrayList<>();
         for (MovieFavorite fav : movieFavorites) {
             Movie movie = new Movie();
@@ -57,6 +60,10 @@ public class BaseFragment extends Fragment {
             movies.add(movie);
         }
         return movies;
+    }
+
+    protected SharedPreferences getSharedPreferences() {
+        return getActivity().getSharedPreferences("SETTING", Context.MODE_PRIVATE);
     }
 
 }

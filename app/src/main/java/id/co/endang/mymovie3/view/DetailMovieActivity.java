@@ -59,11 +59,11 @@ public class DetailMovieActivity extends AppCompatActivity {
         movieRepository = new MovieRepository(getApplicationContext());
         showLoading(true);
         movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
-        type = getIntent().getIntExtra(EXTRA_TYPE,0);
-        isFavorite = getIntent().getBooleanExtra(EXTRA_STATUS,false);
+        type = getIntent().getIntExtra(EXTRA_TYPE, 0);
+        isFavorite = getIntent().getBooleanExtra(EXTRA_STATUS, false);
         if (movie != null) {
             initView();
-            if (getSupportActionBar()!=null)
+            if (getSupportActionBar() != null)
                 getSupportActionBar().setTitle(StringUtils.isNotBlank(movie.getTitle()) ? movie.getTitle() : movie.getName());
         } else {
             Snackbar.make(constraintLayout, "Failed Load Data", Snackbar.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         poster.setContentDescription(title.getText().toString());
         rating.setText(movie.getVoteAverage().toString());
         releaseDate.setText(StringUtils.isNotBlank(movie.getReleaseDate()) ? movie.getReleaseDate() : movie.getFirstAirDate());
-        overview.setText(StringUtils.isNotBlank(movie.getOverview())?movie.getOverview():getString(R.string.overview_not_found));
+        overview.setText(StringUtils.isNotBlank(movie.getOverview()) ? movie.getOverview() : getString(R.string.overview_not_found));
         showLoading(false);
     }
 
@@ -101,14 +101,14 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.action_favorite){
+        if (item.getItemId() == R.id.action_favorite) {
             if (isFavorite) {
-                position = getIntent().getIntExtra(EXTRA_POSITION,0);
+                position = getIntent().getIntExtra(EXTRA_POSITION, 0);
                 deleteFromFavorite();
-            }else{
+            } else {
                 addToFavorite();
             }
-        }else if (item.getItemId()==android.R.id.home)
+        } else if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -117,8 +117,8 @@ public class DetailMovieActivity extends AppCompatActivity {
         MovieFavorite fav = getMovieFavorite();
         movieRepository.deleteFavorite(fav.getId_tmb());
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_POSITION,position);
-        setResult(RESPONSE_REMOVE,intent);
+        intent.putExtra(EXTRA_POSITION, position);
+        setResult(RESPONSE_REMOVE, intent);
         finish();
     }
 
@@ -131,11 +131,11 @@ public class DetailMovieActivity extends AppCompatActivity {
     private MovieFavorite getMovieFavorite() {
         MovieFavorite fav = new MovieFavorite();
         fav.setId_tmb(movie.getId());
-        fav.setTitle(StringUtils.isBlank(movie.getTitle())?movie.getName():movie.getTitle());
+        fav.setTitle(StringUtils.isBlank(movie.getTitle()) ? movie.getName() : movie.getTitle());
         fav.setOverview(movie.getOverview());
         fav.setBackdropPath(movie.getBackdropPath());
         fav.setPosterPath(movie.getPosterPath());
-        fav.setReleaseDate(StringUtils.isBlank(movie.getReleaseDate())?movie.getFirstAirDate():movie.getReleaseDate());
+        fav.setReleaseDate(StringUtils.isBlank(movie.getReleaseDate()) ? movie.getFirstAirDate() : movie.getReleaseDate());
         fav.setVoteAverage(movie.getVoteAverage());
         fav.setMovieType(type);
         return fav;
@@ -143,7 +143,7 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.favorite_menu,menu);
+        getMenuInflater().inflate(R.menu.favorite_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 }

@@ -18,7 +18,7 @@ public class FavoriteTabAdapter extends FragmentPagerAdapter {
     private final Context mContext;
 
     public FavoriteTabAdapter(@NonNull FragmentManager fm, Context mContext) {
-        super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mContext = mContext;
     }
 

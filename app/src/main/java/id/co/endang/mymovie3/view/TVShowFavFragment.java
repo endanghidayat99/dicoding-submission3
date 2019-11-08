@@ -35,7 +35,7 @@ public class TVShowFavFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_movies,container,false);
+        return inflater.inflate(R.layout.fragment_movies, container, false);
     }
 
     @Override
@@ -51,9 +51,6 @@ public class TVShowFavFragment extends BaseFragment {
         noContent.setVisibility(View.VISIBLE);
         if (savedInstanceState == null) {
             shimerContainer = view.findViewById(R.id.shimmer_container);
-//            shimerContainer.setVisibility(View.VISIBLE);
-//            shimerContainer.setDuration(1000);
-//            shimerContainer.startShimmerAnimation();
             loadTVShowData();
         } else {
             ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
@@ -62,8 +59,8 @@ public class TVShowFavFragment extends BaseFragment {
 
         movieAdapter.setOnItemClickCallBack(new MovieAdapter.OnItemClickCallBack() {
             @Override
-            public void onItemClicked(Movie data,int position) {
-                showDetailMovieForResult(data,getContext(),1,true,position);
+            public void onItemClicked(Movie data, int position) {
+                showDetailMovieForResult(data, getContext(), 1, true, position);
             }
         });
 
@@ -73,12 +70,10 @@ public class TVShowFavFragment extends BaseFragment {
         movieRepository.getMovieByType(1).observe(this, new Observer<List<MovieFavorite>>() {
             @Override
             public void onChanged(List<MovieFavorite> movieFavorites) {
-                if (movieFavorites.size()>0){
+                if (movieFavorites.size() > 0) {
                     ArrayList<Movie> movies = getListMovies(movieFavorites);
                     movieAdapter.setListMovie(movies);
                     noContent.setVisibility(View.GONE);
-//                    shimerContainer.stopShimmerAnimation();
-//                    shimerContainer.setVisibility(View.GONE);
                 }
             }
         });
@@ -87,13 +82,14 @@ public class TVShowFavFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data!=null){
-            if (requestCode == DetailMovieActivity.REQUEST_UPDATE){
-                if (resultCode == DetailMovieActivity.RESPONSE_REMOVE){
-                    int position = data.getIntExtra(DetailMovieActivity.EXTRA_POSITION,0);
+        if (data != null) {
+            if (requestCode == DetailMovieActivity.REQUEST_UPDATE) {
+                if (resultCode == DetailMovieActivity.RESPONSE_REMOVE) {
+                    int position = data.getIntExtra(DetailMovieActivity.EXTRA_POSITION, 0);
                     movieAdapter.removeItem(position);
                     rvMovies.smoothScrollToPosition(position);
-                    if (movieAdapter.getListMovie().size()==0)noContent.setVisibility(View.VISIBLE);
+                    if (movieAdapter.getListMovie().size() == 0)
+                        noContent.setVisibility(View.VISIBLE);
                 }
             }
         }
